@@ -1,0 +1,933 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeedMe Shop</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #07090e;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 70px;
+    padding: 0 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,10,16,.95);
+    border-bottom: 1px solid #242936;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #ff1744;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-menu a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.nav-menu a:hover {
+    color: #ff1744;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 22px;
+}
+
+/* HERO */
+.hero {
+    min-height: 470px;
+    padding: 70px 5%;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #07090e 10%,
+            rgba(7,9,14,.82) 45%,
+            rgba(7,9,14,.15)
+        ),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 5vw, 70px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #ff1744;
+}
+
+.hero p {
+    color: #c8c8c8;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.hero-button,
+.add-cart,
+.checkout {
+    background: #ff1744;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero-button {
+    padding: 15px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+}
+
+.hero-button:hover,
+.add-cart:hover,
+.checkout:hover {
+    background: #d90035;
+}
+
+/* SHOP */
+.container {
+    padding: 55px 4%;
+}
+
+.section-title {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 35px;
+    background: #ff1744;
+    margin-right: 15px;
+    vertical-align: middle;
+    border-radius: 10px;
+}
+
+.shop-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.product {
+    background: #10131b;
+    border: 1px solid #29303d;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.product:hover {
+    transform: translateY(-6px);
+    border-color: #ff1744;
+    box-shadow: 0 10px 30px rgba(255,23,68,.12);
+}
+
+.product-image {
+    height: 155px;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.product-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,.7)
+    );
+}
+
+.product-logo {
+    position: relative;
+    z-index: 2;
+    font-size: 34px;
+    font-weight: 900;
+    text-shadow: 0 3px 15px black;
+}
+
+.netflix {
+    background-image:
+        url("https://images.unsplash.com/photo-1618172193622-ae2d025f4032?auto=format&fit=crop&w=700&q=80");
+}
+
+.disney {
+    background-image:
+        url("https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=700&q=80");
+}
+
+.hbo {
+    background-image:
+        url("https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80");
+}
+
+.prime {
+    background-image:
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80");
+}
+
+.vidio {
+    background-image:
+        url("https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=700&q=80");
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.product p {
+    color: #9298a5;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 40px;
+}
+
+.duration {
+    display: inline-block;
+    background: #202632;
+    color: #ddd;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 12px 0;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.add-cart {
+    width: 100%;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* CART */
+.cart {
+    background: #10131b;
+    border: 1px solid #303744;
+    border-radius: 14px;
+    padding: 22px;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+
+.cart-title {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #303744;
+    margin-bottom: 18px;
+}
+
+.cart-count {
+    background: #ff1744;
+    min-width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 13px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #252b35;
+}
+
+.cart-item-name {
+    font-size: 14px;
+}
+
+.cart-item-price {
+    color: #ff1744;
+    font-weight: bold;
+}
+
+.remove {
+    color: #777;
+    cursor: pointer;
+}
+
+.remove:hover {
+    color: #ff1744;
+}
+
+.empty {
+    color: #777;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.total-price {
+    color: #ff1744;
+}
+
+.checkout {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 16px;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 50px;
+    padding: 40px 5%;
+    border-top: 1px solid #252b35;
+    background: #050609;
+    color: #888;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-logo {
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.footer-logo span {
+    color: #ff1744;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.contact-box {
+    margin-top: 25px;
+    padding: 18px;
+    background: #10131b;
+    border: 1px solid #303744;
+    border-radius: 12px;
+    max-width: 350px;
+}
+
+.contact-box h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.phone {
+    color: #ff1744;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.whatsapp:hover {
+    background: #1da851;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .shop-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cart {
+        position: relative;
+        top: 0;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 550px) {
+    .hero {
+        min-height: 420px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="logo">
+        ▶ NeedMe <span>Shop</span>
+    </div>
+
+    <nav class="nav-menu">
+        <a href="#home">Home</a>
+        <a href="#produk">Produk</a>
+        <a href="#tentang">Tentang Kami</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+
+    <div class="nav-icons">
+        🔍 🛒
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Streaming Favoritmu
+            Cuma di <span>NeedMe Shop</span>
+        </h1>
+
+        <p>
+            Nikmati berbagai layanan streaming populer
+            dengan harga terjangkau dan proses yang mudah.
+        </p>
+
+        <button
+            class="hero-button"
+            onclick="document.getElementById('produk').scrollIntoView()">
+            Lihat Produk →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUK -->
+<section class="container" id="produk">
+
+    <h2 class="section-title">
+        Paket Streaming
+    </h2>
+
+    <div class="shop-layout">
+
+        <div class="products">
+
+            <!-- NETFLIX -->
+            <div class="product">
+
+                <div class="product-image netflix">
+                    <div class="product-logo">NETFLIX</div>
+                </div>
+
+                <div class="product-info">
+
+                    <h3>Netflix</h3>
+
+                    <p>
+                        Nikmati film, serial,
+                        dan konten original Netflix.
+                    </p>
+
+                    <span class="duration">1 Bulan</span>
+
+                    <div class="price">
+                        Rp65.000
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Netflix 1 Bulan',65000)">
+                        🛒 Tambah
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- DISNEY -->
+            <div class="product">
+
+                <div class="product-image disney">
+                    <div class="product-logo">Disney+</div>
+                </div>
+
+                <div class="product-info">
+
+                    <h3>Disney+ Hotstar</h3>
+
+                    <p>
+                        Film, serial, olahraga,
+                        dan konten Disney.
+                    </p>
+
+                    <span class="duration">1 Bulan</span>
+
+                    <div class="price">
+                        Rp45.000
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Disney+ Hotstar 1 Bulan',45000)">
+                        🛒 Tambah
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- HBO -->
+            <div class="product">
+
+                <div class="product-image hbo">
+                    <div class="product-logo">HBO MAX</div>
+                </div>
+
+                <div class="product-info">
+
+                    <h3>HBO Max</h3>
+
+                    <p>
+                        Serial HBO, film blockbuster,
+                        dan konten eksklusif.
+                    </p>
+
+                    <span class="duration">1 Bulan</span>
+
+                    <div class="price">
+                        Rp55.000
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('HBO Max 1 Bulan',55000)">
+                        🛒 Tambah
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- PRIME VIDEO -->
+            <div class="product">
+
+                <div class="product-image prime">
+                    <div class="product-logo">prime video</div>
+                </div>
+
+                <div class="product-info">
+
+                    <h3>Prime Video</h3>
+
+                    <p>
+                        Akses berbagai film,
+                        serial dan original Prime.
+                    </p>
+
+                    <span class="duration">1 Bulan</span>
+
+                    <div class="price">
+                        Rp40.000
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Prime Video 1 Bulan',40000)">
+                        🛒 Tambah
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- VIDIO -->
+            <div class="product">
+
+                <div class="product-image vidio">
+                    <div class="product-logo">Vidio</div>
+                </div>
+
+                <div class="product-info">
+
+                    <h3>Vidio</h3>
+
+                    <p>
+                        Tonton berbagai tayangan
+                        lokal dan internasional.
+                    </p>
+
+                    <span class="duration">1 Bulan</span>
+
+                    <div class="price">
+                        Rp35.000
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Vidio 1 Bulan',35000)">
+                        🛒 Tambah
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- KERANJANG -->
+        <aside class="cart">
+
+            <div class="cart-title">
+
+                <h2>🛒 Keranjang</h2>
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+                    0
+                </span>
+
+            </div>
+
+            <div id="cartItems">
+
+                <div class="empty">
+                    Keranjang masih kosong.
+                </div>
+
+            </div>
+
+            <div class="total">
+
+                <span>Total</span>
+
+                <span
+                    class="total-price"
+                    id="totalPrice">
+                    Rp0
+                </span>
+
+            </div>
+
+            <button
+                class="checkout"
+                onclick="checkout()">
+                🛒 Checkout
+            </button>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer id="kontak">
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                Need<span>Me</span> Shop
+            </div>
+
+            <p style="margin-top:10px;">
+                Streaming lebih mudah,
+                harga lebih hemat.
+            </p>
+
+            <!-- NOMOR TELEPON -->
+            <div class="contact-box">
+
+                <h3>📞 Hubungi Kami</h3>
+
+                <div class="phone">
+                    082274003731
+                </div>
+
+                <a
+                    class="whatsapp"
+                    href="https://wa.me/6282274003731"
+                    target="_blank">
+                    💬 Chat WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#home">Home</a>
+            <a href="#produk">Produk</a>
+            <a href="#tentang">Tentang Kami</a>
+            <a href="#kontak">Kontak</a>
+
+        </div>
+
+    </div>
+
+    <p style="margin-top:30px;">
+        © 2026 NeedMe Shop. Demo website.
+    </p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+/* TAMBAH PRODUK */
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+}
+
+
+/* UPDATE KERANJANG */
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const totalPrice =
+        document.getElementById("totalPrice");
+
+
+    cartCount.textContent = cart.length;
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <div class="empty">
+                Keranjang masih kosong.
+            </div>
+        `;
+
+        totalPrice.textContent = "Rp0";
+
+        return;
+    }
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        const element =
+            document.createElement("div");
+
+        element.className = "cart-item";
+
+        element.innerHTML = `
+
+            <div>
+
+                <div class="cart-item-name">
+                    ${item.name}
+                </div>
+
+                <div class="cart-item-price">
+                    ${formatRupiah(item.price)}
+                </div>
+
+            </div>
+
+            <div
+                class="remove"
+                onclick="removeItem(${index})">
+                ✕
+            </div>
+
+        `;
+
+        cartItems.appendChild(element);
+
+    });
+
+
+    totalPrice.textContent =
+        formatRupiah(total);
+}
+
+
+/* HAPUS PRODUK */
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+}
+
+
+/* FORMAT RUPIAH */
+function formatRupiah(number) {
+
+    return "Rp" +
+        number.toLocaleString("id-ID");
+}
+
+
+/* CHECKOUT */
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Keranjang masih kosong!");
+
+        return;
+    }
+
+
+    let total = cart.reduce(
+        (sum, item) => sum + item.price,
+        0
+    );
+
+
+    alert(
+        "Checkout NeedMe Shop\n\n" +
+        "Jumlah produk: " + cart.length +
+        "\nTotal: " + formatRupiah(total) +
+        "\n\nSilakan hubungi WhatsApp 082274003731 untuk melanjutkan."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
+```
